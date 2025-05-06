@@ -18,12 +18,21 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+    /**
+     * Obtiene la lista completa de usuarios registrados.
+     * @return Lista de usuarios
+     */
     // GET /api/usuarios
     @GetMapping
     public ResponseEntity<List<Usuario>> getAll() {
         return ResponseEntity.ok(usuarioService.findAll());
     }
 
+    /**
+     * Obtiene un usuario por su ID.
+     * @param id Identificador del usuario
+     * @return Usuario correspondiente al ID
+     */
     // GET /api/usuarios/{id}
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> getById(@PathVariable Long id) {
@@ -34,6 +43,11 @@ public class UsuarioController {
         }
     }
 
+    /**
+     * Obtiene un usuario por su email.
+     * @param email Correo electrónico del usuario
+     * @return Usuario correspondiente al email
+     */
     // GET /api/usuarios/email/{email}
     @GetMapping("/email/{email}")
     public ResponseEntity<Usuario> getByEmail(@PathVariable String email) {
@@ -44,6 +58,11 @@ public class UsuarioController {
         }
     }
 
+    /**
+     * Obtiene un usuario por su nombre.
+     * @param nombre Nombre del usuario
+     * @return Usuario correspondiente al nombre
+     */
     // GET /api/usuarios/nombre/{nombre}
     @GetMapping("/nombre/{nombre}")
     public ResponseEntity<Usuario> getByNombre(@PathVariable String nombre) {
@@ -54,12 +73,23 @@ public class UsuarioController {
         }
     }
 
+    /**
+     * Registra un nuevo usuario.
+     * @param usuario Datos del usuario a registrar
+     * @return Usuario registrado con ID asignado
+     */
     // POST /api/usuarios
     @PostMapping
     public ResponseEntity<Usuario> create(@RequestBody Usuario usuario) {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(usuario));
     }
 
+    /**
+     * Actualiza un usuario existente.
+     * @param id ID del usuario a actualizar
+     * @param usuario Nuevos datos del usuario
+     * @return Usuario actualizado
+     */
     // PUT /api/usuarios/{id}
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario usuario) {
@@ -70,6 +100,11 @@ public class UsuarioController {
         }
     }
 
+    /**
+     * Elimina un usuario por su ID.
+     * @param id ID del usuario
+     * @return Sin contenido si se elimina correctamente
+     */
     // DELETE /api/usuarios/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
