@@ -29,10 +29,18 @@ public class LibroController {
     @GetMapping("/{id}")
     public ResponseEntity<Libro> getById(@PathVariable Long id) {
         try {
-            Libro libro = libroService.findAll().stream()
-                    .filter(l -> l.getId().equals(id))
-                    .findFirst()
-                    .orElseThrow(() -> new LibroNoEncontradoException(id));
+            Libro libro = libroService.findById(id);
+            return ResponseEntity.ok(libro);
+        } catch (LibroNoEncontradoException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    // GET /api/libros/isbn/{isbn}
+    @GetMapping("/isbn/{isbn}")
+    public ResponseEntity<Libro> getByIsbn(@PathVariable String isbn) {
+        try {
+            Libro libro = libroService.findByIsbn(isbn);
             return ResponseEntity.ok(libro);
         } catch (LibroNoEncontradoException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

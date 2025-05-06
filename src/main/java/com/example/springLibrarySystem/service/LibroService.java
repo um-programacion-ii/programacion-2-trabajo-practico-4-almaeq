@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface LibroService {
     Libro findByIsbn(String isbn);
+    Libro findById(Long id);
     List<Libro> findAll();
     Libro save(Libro libro);
     void deleteById(Long id);
