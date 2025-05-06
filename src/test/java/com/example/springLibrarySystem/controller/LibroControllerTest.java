@@ -31,7 +31,7 @@ class LibroControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    void GET_libros_devuelveLista() throws Exception {
+    void GETBooksReturnList() throws Exception {
         List<Libro> libros = List.of(
                 new Libro(1L, "123", "Libro 1", "Autor 1", EstadoLibro.DISPONIBLE),
                 new Libro(2L, "456", "Libro 2", "Autor 2", EstadoLibro.PRESTADO)
@@ -46,7 +46,7 @@ class LibroControllerTest {
     }
 
     @Test
-    void GET_libroPorId_existente_devuelveLibro() throws Exception {
+    void GETBookByIdExistentReturnBook() throws Exception {
         // Arrange
         Libro libro = new Libro(1L, "123", "Libro A", "Autor A", EstadoLibro.DISPONIBLE);
         when(libroService.findById(1L)).thenReturn(libro);
@@ -60,7 +60,7 @@ class LibroControllerTest {
     }
 
     @Test
-    void GET_libroPorId_noExiste_devuelve404() throws Exception {
+    void GETBookByIdNotExistentReturn404() throws Exception {
         when(libroService.findByIsbn("xxx")).thenThrow(new LibroNoEncontradoException("xxx"));
 
         mockMvc.perform(get("/api/libros/isbn/xxx"))
@@ -68,7 +68,7 @@ class LibroControllerTest {
     }
 
     @Test
-    void GET_libroPorIsbn_existente_devuelveLibro() throws Exception {
+    void GETBookByIsbnExistentReturnBook() throws Exception {
         // Arrange
         String isbn = "123-456";
         Libro libro = new Libro(1L, isbn, "Libro A", "Autor A", EstadoLibro.DISPONIBLE);
@@ -83,7 +83,7 @@ class LibroControllerTest {
     }
 
     @Test
-    void GET_libroPorIsbn_noExiste_devuelve404() throws Exception {
+    void GETBookByIsbnNoExistentReturn404() throws Exception {
         // Arrange
         String isbn = "inexistente";
         when(libroService.findByIsbn(isbn)).thenThrow(new LibroNoEncontradoException(isbn));
@@ -94,7 +94,7 @@ class LibroControllerTest {
     }
 
     @Test
-    void POST_libro_creaYDevuelveLibro() throws Exception {
+    void POSTBookCreateAndReturnBook() throws Exception {
         Libro nuevo = new Libro(null, "789", "Nuevo Libro", "Autor", EstadoLibro.DISPONIBLE);
         Libro creado = new Libro(3L, "789", "Nuevo Libro", "Autor", EstadoLibro.DISPONIBLE);
 
@@ -108,7 +108,7 @@ class LibroControllerTest {
     }
 
     @Test
-    void PUT_libro_actualizaCorrectamente() throws Exception {
+    void PUTBookUpdateBook() throws Exception {
         Libro actualizado = new Libro(1L, "123", "Actualizado", "Autor", EstadoLibro.DISPONIBLE);
         when(libroService.update(eq(1L), any())).thenReturn(actualizado);
 
@@ -120,7 +120,7 @@ class LibroControllerTest {
     }
 
     @Test
-    void DELETE_libro_eliminaCorrectamente() throws Exception {
+    void DELETEBook() throws Exception {
         doNothing().when(libroService).deleteById(1L);
 
         mockMvc.perform(delete("/api/libros/1"))
