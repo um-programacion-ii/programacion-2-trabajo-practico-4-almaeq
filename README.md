@@ -1,3 +1,4 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/Vg2EF-QZ)
 # 🚀 Trabajo Práctico: Sistema de Gestión de Biblioteca con Spring Framework
 
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.4.5-green)
@@ -118,8 +119,8 @@ Desarrollar un sistema de gestión de biblioteca utilizando Spring Framework, im
 > 💡 **Nota**: Esta estimación considera la experiencia adquirida en trabajos anteriores y la complejidad de implementar una arquitectura en capas con Spring Framework. El tiempo se ha ajustado considerando que no se requiere implementación de persistencia real.
 
 ## 👨‍🎓 Información del Alumno
-- **Nombre y Apellido**: [Nombre y Apellido del Alumno]
-- **Legajo**: [Número de Legajo]
+- **Nombre y Apellido**: Alma Quinteros
+- **Legajo**: 62016
 
 ## 📋 Requisitos Previos
 
@@ -140,6 +141,141 @@ Desarrollar un sistema de gestión de biblioteca utilizando Spring Framework, im
 - JUnit 5.10.1
 - Mockito 5.8.0
 - Git y GitHub
+
+---
+# 📚 Sistema de Gestión de Biblioteca
+
+Este proyecto es parte de un trabajo práctico para Programación II, y consiste en un sistema de gestión de biblioteca implementado con Spring Boot, aplicando arquitectura en capas, buenas prácticas y principios SOLID.
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+- Java 21
+- Spring Boot 3.4.5
+- Spring Web / Spring Test
+- Maven
+- JUnit 5.10.1
+- Mockito 5.8.0
+- Lombok (opcional)
+
+---
+
+## 📦 Estructura del Proyecto
+
+```bash
+src/
+├── main/
+│   ├── java/com/example/springLibrarySystem/
+│   │   ├── controller/         # Controladores REST
+│   │   ├── service/            # Interfaces y servicios
+│   │   ├── repository/         # Interfaces y repositorios en memoria
+│   │   ├── models/             # Entidades: Libro, Usuario, Prestamo
+│   │   └── enums/              # Enums como EstadoLibro, EstadoUsuario
+│
+├── test/
+│   ├── java/com/example/springLibrarySystem/
+│   │   ├── controller/         # Tests de integración con MockMvc
+│   │   ├── service/            # Tests unitarios con Mockito
+│   │   └── repository/         # Tests de repositorios en memoria
+```
+
+---
+
+## 📐 Arquitectura y diseño
+
+El sistema sigue una arquitectura por capas:
+
+- **Modelos** (`models`) representan las entidades del dominio.
+- **Repositorios** (`repository`) simulan persistencia usando `Map<Long, T>`.
+- **Servicios** (`service`) contienen la lógica de negocio.
+- **Controladores** (`controller`) exponen endpoints REST.
+  
+Se aplican principios **SOLID**, especialmente:
+
+- SRP: cada clase tiene una sola responsabilidad clara.
+- DIP: los servicios dependen de interfaces.
+- ISP: las interfaces están segmentadas según funcionalidad.
+
+---
+
+## 🚀 Instrucciones para correr el proyecto
+
+### Requisitos previos
+
+- Java 21
+- Maven 3.9.x
+- Git
+
+### Clonar el proyecto
+
+```bash
+git clone git@github.com:um-programacion-ii/programacion-2-trabajo-practico-4-almaeq.git
+cd programacion-2-trabajo-practico-4-almaeq
+```
+
+### Ejecutar la aplicación
+
+```bash
+mvn spring-boot:run
+```
+
+### Ejecutar los tests
+
+```bash
+mvn test
+```
+
+---
+
+## 🔗 Endpoints disponibles
+
+### 📘 Libros
+
+| Método | Endpoint               | Descripción                      |
+|--------|------------------------|----------------------------------|
+| GET    | `/api/libros`          | Obtener todos los libros         |
+| GET    | `/api/libros/{id}`     | Obtener un libro por ID          |
+| GET    | `/api/libros/isbn/{i}` | Obtener un libro por ISBN        |
+| POST   | `/api/libros`          | Crear un nuevo libro             |
+| PUT    | `/api/libros/{id}`     | Actualizar un libro existente    |
+| DELETE | `/api/libros/{id}`     | Eliminar un libro                |
+
+### 👤 Usuarios
+
+| Método | Endpoint                  | Descripción                      |
+|--------|---------------------------|----------------------------------|
+| GET    | `/api/usuarios`           | Obtener todos los usuarios       |
+| GET    | `/api/usuarios/{id}`      | Obtener usuario por ID           |
+| GET    | `/api/usuarios/email/{e}` | Obtener usuario por email        |
+| GET    | `/api/usuarios/nombre/{n}`| Obtener usuario por nombre       |
+| POST   | `/api/usuarios`           | Crear nuevo usuario              |
+| PUT    | `/api/usuarios/{id}`      | Actualizar un usuario            |
+| DELETE | `/api/usuarios/{id}`      | Eliminar un usuario              |
+
+### 📖 Préstamos
+
+| Método | Endpoint                   | Descripción                       |
+|--------|----------------------------|-----------------------------------|
+| GET    | `/api/prestamos`           | Obtener todos los préstamos       |
+| GET    | `/api/prestamos/{id}`      | Obtener préstamo por ID           |
+| POST   | `/api/prestamos`           | Registrar nuevo préstamo          |
+| PUT    | `/api/prestamos/{id}`      | Actualizar préstamo existente     |
+| DELETE | `/api/prestamos/{id}`      | Eliminar un préstamo              |
+
+---
+
+## 🧪 Testing
+
+Los tests cubren:
+
+- Servicios: usando `@Mock` y `@InjectMocks` con Mockito.
+- Controladores: usando `@WebMvcTest` y `MockMvc`.
+- Repositorios: pruebas unitarias sobre estructura en memoria.
+
+Se sigue el patrón `Arrange-Act-Assert` y se verifican tanto casos positivos como errores.
+
+---
 
 ## 📘 Etapas del Trabajo
 
