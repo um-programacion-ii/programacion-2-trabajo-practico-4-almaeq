@@ -96,4 +96,34 @@ class PrestamoControllerTest {
 
         verify(prestamoService).deleteById(1L);
     }
+
+    @Test
+    void GETLoanByIdNotExistentReturn404() throws Exception {
+        when(prestamoService.findById(999L)).thenThrow(new RuntimeException("Préstamo no encontrado"));
+
+        mockMvc.perform(get("/api/prestamos/999"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void PUTUpdateLoanNotExistentReturn404() throws Exception {
+        Prestamo prestamo = createTrialLoan();
+        when(prestamoService.update(eq(999L), any()))
+                .thenThrow(new RuntimeException("Préstamo no encontrado"));
+
+        mockMvc.perform(put("/api/prestamos/999")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(prestamo)))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void DELETELoanNotExistentReturn404() throws Exception {
+        doThrow(new RuntimeException("Préstamo no encontrado"))
+                .when(prestamoService).deleteById(999L);
+
+        mockMvc.perform(delete("/api/prestamos/999"))
+                .andExpect(status().isNotFound());
+    }
+
 }
